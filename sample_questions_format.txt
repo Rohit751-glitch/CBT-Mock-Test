@@ -1,0 +1,21 @@
+[Section: General Aptitude]
+
+Q1. If 25% of a number is 40, what is the number?
+
+A) 100
+B) 120
+C) 160
+D) 200
+Ans: C
+Exp: 25% of N = 40, so N = 40 / 0.25 = 160.
+
+[Section: Electrical Engineering]
+
+Q2. In DC steady state, an ideal inductor behaves as:
+
+A) Open circuit
+B) Short circuit
+C) Current source
+D) Voltage source
+Ans: B
+Exp: For steady DC, di/dt = 0, so the ideal inductor voltage is zero.
