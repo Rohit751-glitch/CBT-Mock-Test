@@ -16,34 +16,65 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Validate staged payload
+      - name: Recover two missing Base64 characters and verify payload
         shell: bash
         run: |
           set -euo pipefail
-          wc -c .update_payload/part*.b64
-          sha256sum .update_payload/part*.b64
-          for f in .update_payload/part*.b64; do
-            echo "INVALID-CHARS $f: $(LC_ALL=C tr -d 'A-Za-z0-9+/=' < "$f" | wc -c)"
-          done
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+
+          alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+          targets = {
+              '.update_payload/part02.b64': '0bf3e44d3eead754dc45a8500d4e0540d4ea82c909c4302ff5438b296208c3ab',
+              '.update_payload/part03.b64': 'e3c841dbebff4bf0dc7b212cc8f74939ee49e502944b797ebac9e14309dc6d69',
+          }
+          for fn, target in targets.items():
+              p = Path(fn)
+              s = p.read_text().strip()
+              assert len(s) == 19999, (fn, len(s))
+              found = None
+              for i in range(len(s) + 1):
+                  left, right = s[:i], s[i:]
+                  for ch in alphabet:
+                      candidate = left + ch + right
+                      if hashlib.sha256(candidate.encode()).hexdigest() == target:
+                          found = candidate
+                          print(f'Recovered {fn}: inserted {ch!r} at index {i}')
+                          break
+                  if found is not None:
+                      break
+              if found is None:
+                  raise SystemExit(f'Could not recover {fn}')
+              p.write_text(found)
+          PY
+
+          echo 'acaa4a2fb332d27dabe48e703173446ba57238b8ac4f180f2fde6c20e6606dc1  .update_payload/part01.b64' | sha256sum -c -
+          echo '0bf3e44d3eead754dc45a8500d4e0540d4ea82c909c4302ff5438b296208c3ab  .update_payload/part02.b64' | sha256sum -c -
+          echo 'e3c841dbebff4bf0dc7b212cc8f74939ee49e502944b797ebac9e14309dc6d69  .update_payload/part03.b64' | sha256sum -c -
+          echo '561a876b280b5b6b773b2aa14a5ad3a3324368b90d11bd1d924498d6b105eba7  .update_payload/part04.b64' | sha256sum -c -
 
       - name: Reconstruct and apply latest app
         shell: bash
         run: |
           set -euo pipefail
-          cat .update_payload/part*.b64 | base64 -d > /tmp/cbt-v6.zip
+          cat .update_payload/part01.b64 .update_payload/part02.b64 .update_payload/part03.b64 .update_payload/part04.b64 | base64 -d > /tmp/cbt-v6.zip
           unzip -t /tmp/cbt-v6.zip
           rm -rf /tmp/cbt-v6
           mkdir -p /tmp/cbt-v6
           unzip -q -o /tmp/cbt-v6.zip -d /tmp/cbt-v6
+
           cp /tmp/cbt-v6/index.html ./index.html
           cp /tmp/cbt-v6/style.css ./style.css
           cp /tmp/cbt-v6/app.js ./app.js
           cp /tmp/cbt-v6/README.md ./README.md
           cp /tmp/cbt-v6/sample_questions_format.txt ./sample_questions_format.txt
           cp /tmp/cbt-v6/QUESTION_AUTHORING_RULES.md ./QUESTION_AUTHORING_RULES.md
+
           rm -rf .update_payload
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A
-          git commit -m "Update CBT Mock Test to v6 latest"
+          git commit -m 'Update CBT Mock Test to v6 latest'
           git push
