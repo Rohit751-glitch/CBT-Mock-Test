@@ -1,21 +1,29 @@
 [Section: General Aptitude]
+Q1. If a train running at 72 km/h crosses a pole in 15 seconds, what is its length?
+A) 250 meters
+B) 300 meters
+C) 360 meters
+D) 400 meters
+Ans: B
 
-Q1. If 25% of a number is 40, what is the number?
-
-A) 100
-B) 120
-C) 160
-D) 200
-Ans: C
-Exp: 25% of N = 40, so N = 40 / 0.25 = 160.
+Q2. In a certain code, 'ROHIT' is written as 'SPIJU'. How will 'POWER' be written?
+A) QPXFS
+B) QPXES
+C) QOXFS
+D) ROXFT
+Ans: A
 
 [Section: Electrical Engineering]
-
-Q2. In DC steady state, an ideal inductor behaves as:
-
-A) Open circuit
-B) Short circuit
-C) Current source
-D) Voltage source
+Q3. For sensorless control of a BLDC motor, which parameter is sensed?
+A) Hall flux
+B) Zero-Crossing Detection (ZCD) of Back-EMF
+C) Rotor eddy dissipation
+D) Stator temperature
 Ans: B
-Exp: For steady DC, di/dt = 0, so the ideal inductor voltage is zero.
+
+Q4. In a transformer, maximum voltage regulation occurs at power factor:
+A) Unity
+B) Lagging R/Z
+C) Lagging X/Z
+D) Leading X/Z
+Ans: C

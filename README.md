@@ -1,52 +1,62 @@
-# CBT Mock Test
+# TCS iON / DigiALM Authentic CBT Mock Assessment Platform
 
-A lightweight, browser-based CBT mock-test platform inspired by common Indian computer-based examination interfaces.
+A professional web application replicating the authentic **TCS iON (DigiALM)** Computer-Based Test (CBT) examination environment used across Indian PSU, GATE, HAL, NMDC, DRDO, and SSC examinations.
 
-## Live usage
+---
 
-After GitHub Pages is enabled for this repository, open:
+## 🌟 What's Included
 
-**https://Rohit751-glitch.github.io/CBT-Mock-Test/**
+1. **Authentic TCS iON Examination Interface**:
+   - Realistic Candidate Login Screen (Candidate details, system name, photo preview, version tag).
+   - Verbatim General Instructions with the 5 TCS status legends (Not Visited, Not Answered, Answered, Marked for Review, Answered & Marked for Review).
+   - Candidate Declaration screen with checkbox undertaking and language selection.
+   - Live Countdown Timer with automatic exam submission when time expires.
+   - Dynamic Section Tabs with live question counters.
+   - Subbar with question type, marks per question, negative marks, and tool links.
+   - Question Palette with responsive layout, collapsible sidebar, and active question indicator.
+   - Pre-submission Exam Summary table showing section-by-section attempt metrics.
+   - Integrated Virtual Scientific Calculator and Question Paper popup viewer.
 
-No installation, backend, database, or API key is required.
+2. **Rich Content & Media Support (Images, Circuits, Code, Graphs, Tables)**:
+   - **Images & Diagrams**: Paste markdown `![Alt](url)` or click **"🖼️ Insert Local Image"** to select any PNG/JPG file from your PC; it is automatically converted into an offline Base64 embedded string.
+   - **Click-to-Zoom Lightbox**: Clicking any image or diagram opens a full-screen high-resolution inspection modal.
+   - **Circuits & Graphs in Code (Inline SVG)**: Paste vector SVG code directly into questions or options. Renders clean, high-precision circuit schematics and signal graphs.
+   - **Code Blocks**: Embedded C, Python, Verilog, or Assembly code wrapped in ` ```lang ... ``` ` with a dark syntax theme and one-click **"📋 Copy"** button.
+   - **Tables**: Supports Markdown tables (`| Col1 | Col2 |`) and HTML `<table>` elements for state tables, truth tables, and component specifications.
+   - **Rich Options**: Options A, B, C, and D can also contain images, circuits, or code!
 
-## What it does
+3. **Per-Question Time Tracking Engine**:
+   - Actively logs the exact time (in seconds and minutes) spent on each question.
+   - Real-time question stopwatch: `⏱️ Time on Question: MM:SS`.
+   - Post-test Question Analysis table showing the duration spent on every single question.
+   - Total test duration, average time per question, and section-level time tracking.
+   - Downloadable CSV and JSON reports containing granular question-by-question time data.
 
-- Paste questions directly into the built-in Test Creator.
-- Supports sections, four-option MCQs, answers and explanations.
-- Supports Markdown images, Base64 images, inline SVG diagrams, code blocks and tables.
-- Configurable test duration, marks and negative marking.
-- TCS-style question palette and exam navigation.
-- Per-question time tracking.
-- Rough/scribble pad.
-- Scorecard and detailed solution review.
-- Exportable result data.
-- Browser localStorage persistence.
+4. **Built-in Digital Rough Sheet / Scribble Pad**:
+   - Located right below the question for instant rough work, circuit sketching, and math calculations.
+   - Touchpad, Mouse, and Stylus / Pen pressure support.
+   - Pen mode, Eraser mode, color palette (Black, Blue, Red, Pencil Graphite), stroke thickness selector (Fine 2px, Medium 4px, Thick 8px), Undo stroke, and Clear Pad.
+   - **Expandable / Infinite Height**: `➕ Expand Height (+300px)` button allows adding endless vertical canvas space and scrolling down as much as needed.
+   - **Autosave per Question**: Your rough sketches are automatically linked and saved to each question ID. When moving between questions, rough notes are preserved and restored.
+   - Review rough sketches in the post-exam solution review alongside official explanations!
 
-## Fastest workflow
+5. **Dynamic Test Creator & Question Importer**:
+   - Easily create new tests or import custom question sets.
+   - Auto-detection of sections (e.g., `[Section: Electrical Engineering]`).
+   - Configurable exam title, duration, marks per question, and negative marking (1/3rd, 1/4th, 1/2, 0, or custom).
+   - Preloaded with 10 sample PSU questions (General Aptitude & Electrical Engineering with SVG circuit and C code).
+   - LocalStorage persistence: Custom tests remain saved even after refreshing the browser.
 
-1. Open the website.
-2. Open **Test Creator**.
-3. Paste questions in the supported format.
-4. Set exam name, duration, marks and negative marking.
-5. Create/start the test.
-6. Attempt it like a normal CBT and review the result.
+6. **Post-Exam Scorecard & Solution Analysis**:
+   - Overall Scorecard: Total Marks, Percentage, Accuracy %, Correct / Incorrect / Unattempted counts.
+   - Section-wise Performance table.
+   - Detailed Question-by-Question Solution Cards with explanations, selected vs correct options, time taken, and saved rough work images.
+   - One-click export to CSV, JSON, and printable PDF.
 
-See `sample_questions_format.txt` for a minimal example and
-`CBT_Question_Bank_Author_Portable_SKILL.md` for AI question-generation rules.
+---
 
-## Important storage note
+## 🚀 How to Run on Your PC
 
-The app is static and stores custom test data locally in the browser. Data saved on one browser/device does not automatically sync to another device.
-
-## Hosting
-
-The app is a standalone static `index.html`, so GitHub Pages can host it free of charge.
-
-Enable it from:
-
-**Repository → Settings → Pages → Deploy from a branch → main → /(root)**
-
-## License
-
-MIT License. You may use, modify and redistribute the project subject to the license terms.
+1. Extract the `tcs_cbt_mock_test.zip` file on your PC.
+2. Double-click `index.html` to open it in your browser (Chrome, Edge, Firefox, etc.).
+3. Runs completely offline without any internet connection or installation required.
